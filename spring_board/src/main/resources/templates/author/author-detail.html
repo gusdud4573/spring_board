@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>회원 상세 정보</title>
+  <style>
+        .pull-right {
+            float: right;
+            margin-left: 10px;
+        }
+
+        .btn-primary {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/">게시판 서비스</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="localhost:8080/authors">회원관리</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="localhost:8080/post">글목록</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="page-header">
+    <h1>회원 상세 정보</h1>
+  </div>
+
+  <table class="table">
+    <tr>
+      <td>Id:</td>
+      <td th:text="${author.id}"></td>
+    </tr>
+    <tr>
+      <td>Name:</td>
+      <td th:text="${author.name}"></td>
+    </tr>
+    <tr>
+      <td>Email:</td>
+      <td th:text="${author.email}"></td>
+    </tr>
+    <tr>
+      <td>Role:</td>
+      <td th:text="${author.role}"></td>
+    </tr>
+    <tr>
+      <td>Create Date:</td>
+      <td th:text="${author.createDate}"></td>
+    </tr>
+  </table>
+
+  <div class="pull-right">
+    <button id="edit-button" class="btn btn-primary">회원 정보 수정</button>
+  </div>
+  <div class="pull-right">
+    <a th:href="@{'author/delete?id=' + ${author.id}}" class="btn btn-primary">회원 정보 삭제</a>
+  </div>
+  <div id="edit-form" class="hidden">
+    <form action="/author/update" method="post">
+      <div class="form-group">
+        <label>id:</label>
+        <input type="id" class="form-control" id="id" name = "id"  th:value="${author.id}" readonly>
+      </div>
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" name = "name" th:value="${author.name}">
+      </div>
+      <div class="form-group">
+        <label>email:</label>
+        <input type="email" class="form-control" id="email" name = "email"  th:value="${author.email}" readonly>
+      </div>
+      <div class="form-group">
+        <label>password:</label>
+        <input class="form-control" id="password" name = "password">
+      </div>
+      <div class="form-group">
+        <label for="role">Role:</label>
+        <input type="text" class="form-control" id="role" name = "role"  th:value="${author.role}">
+      </div>
+      <button type="submit" class="btn btn-primary">수정 완료</button>
+    </form>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    document.getElementById('edit-button').addEventListener('click', function() {
+        document.getElementById('edit-form').style.display = 'block';
+    });
+</script>
+
+</body>
+</html>
+</body>
+</html>

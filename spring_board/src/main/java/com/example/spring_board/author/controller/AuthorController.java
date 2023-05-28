@@ -30,12 +30,13 @@ public class AuthorController {
     @PostMapping("authors/new")
     public String authorCreate(@RequestParam(value="name")String myname,
                                @RequestParam(value="email")String myemail,
-                               @RequestParam(value="password")String mypassword) throws SQLException {
+                               @RequestParam(value="password")String mypassword,
+                               @RequestParam(value="role")String myrole) throws SQLException {
         Author author1 = new Author();
         author1.setName(myname);
         author1.setEmail(myemail);
         author1.setPassword(mypassword);
-        author1.setRole("user");
+        author1.setRole(myrole);
         author1.setCreateDate(LocalDateTime.now()); //현재 시각을 찍는 메서드
         authorService.create(author1);
         return "redirect:/";
@@ -56,14 +57,16 @@ public class AuthorController {
     }
 
     @PostMapping("author/update")
-    public String authorUpdate(@RequestParam(value="id")String myId,
+    public String authorUpdate(@RequestParam(value="id")String myid,
                                @RequestParam(value="name")String myname,
                                @RequestParam(value="email")String myemail,
+                               @RequestParam(value="role")String myrole,
                                @RequestParam(value="password")String mypassword) throws Exception {
         Author author1 = new Author();
-        author1.setId(Long.parseLong(myId));
+        author1.setId(Long.parseLong(myid));
         author1.setName(myname);
         author1.setEmail(myemail);
+        author1.setRole(myrole);
         author1.setPassword(mypassword);
         authorService.update(author1);
         return "redirect:/";
@@ -73,7 +76,7 @@ public class AuthorController {
     // form 태그에서 DeleteMapping을 지원하지 않는다는 얘기는 action = "delete"를 줄 수 없다는 뜻.
     // 그래서, react나 vue.js와 같은 프론트엔드의 특정한 기술을 통해서 delete 요청을 일반적으로 하므로,
     // restAPI 방식의 개발(json)에서는 DeleteMapping이 가능하다.
-    @PostMapping("author/delete")
+    @GetMapping("author/delete")
     public String deleteAuthor(@RequestParam(value="id")String id){
         authorService.delete(Long.parseLong(id));
         return "redirect:/authors";

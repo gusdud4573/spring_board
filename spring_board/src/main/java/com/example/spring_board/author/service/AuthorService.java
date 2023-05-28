@@ -34,15 +34,16 @@ public class AuthorService {
     // 회원정보수정
     public void update(Author author) throws Exception {
         Author author1 = authorRepository.findById(author.getId()).orElse(null);
+
         if(author1==null){
             throw new Exception();
         }else{
             author1.setName(author.getName());
-            author1.setName(author.getEmail());
-            author1.setName(author.getPassword());
+            author1.setEmail(author.getEmail());
+            author1.setPassword(author.getPassword());
+            author1.setRole(author.getRole());
             authorRepository.save(author1);
         }
-        authorRepository.save(author);
     }
 
     public void delete(Long id){

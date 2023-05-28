@@ -1,77 +1,77 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Board</title>
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-          crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>회원 가입</title>
     <style>
-    /*html{position:relative;min-height:100%;}*/
-    body{
-      margin-bottom:60px;
-    }
+        .pull-right {
+            float: right;
+            margin-left: 10px;
+        }
 
-    body > .container{
-      padding:60px 15px 0;
-      width: 180px;
-    }
-    .center{
-      width: 180px;
-      margin: 0 auto;
-    }
-  </style>
+        .btn-primary {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+    </style>
 </head>
+
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">게시판 서비스</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="localhost:8080/authors">회원관리</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="localhost:8080/post">글목록</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
 <div class="container">
     <div class="page-header">
         <h1>회원 가입</h1>
     </div>
-
     <form action="/authors/new" method="post">
-        <div class="page center">
-            <tr>
-                <td>이름</td>
-                <br>
-                <td><input type="text" name="name"> </td>
-                <br>
-            </tr>
-            <tr>
-                <td>email</td>
-                <br>
-                <td><input type="text" name="email">
-                </td>
-                <br>
-            </tr>
-            <tr>
-                <td>비밀번호</td>
-                <br>
-                <td><input type="password" name="password"> </td>
-                <br>
-            </tr>
-
-            <tr>
-                <td>사용자</td>
-                <br>
-                <td><select name="role">
-                    <option>==선택==</option>
-                    <option>admin</option>
-                    <option>user</option>
-                </select>
-                </td>
-            </tr>
-
-            <tr text-align="center">
-                <br>
-                <td colspan="2">
-                    <input type="submit" value="등록">
-                </td>
-            </tr>
+        <div class="form-group">
+            <label>이름</label>
+            <input type="text" name="name" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>email</label>
+            <input type="text" name="email" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>비밀번호</label>
+            <input type="password" name="password" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>사용자</label>
+            <select name="role" class="form-control">
+                <option>==선택==</option>
+                <option>admin</option>
+                <option>user</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">등록</button>
         </div>
     </form>
 </div>
-<br/>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>
