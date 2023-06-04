@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <title>회원관리</title>
+    <title>게시판</title>
     <style>
         .pull-right {
             float: right;
@@ -40,13 +40,10 @@
 
 <div class="container">
     <div class="page-header">
-        <h1>회원 목록</h1>
+        <h1>글목록</h1>
     </div>
     <div class="pull-right">
-        <a href="/" class="btn btn-primary">로그인</a>
-    </div>
-    <div class="pull-right">
-        <a href="/authors/new" class="btn btn-primary">회원가입</a>
+        <a href="/posts/new" class="btn btn-primary">글쓰기</a>
     </div>
     <br/><br/><br/>
 
@@ -55,18 +52,16 @@
             <thead>
             <tr>
                 <th class="col-md-2">id</th>
-                <th class="col-md-3">이름</th>
-                <th class="col-md-4">email</th>
+                <th class="col-md-3">제목</th>
                 <th class="col-md-4">상세보기</th>
                 <!-- <th class="col-md-5">가입일</th> -->
             </tr>
             </thead>
             <tbody>
-            <tr th:each="author : ${authorList}">
-                <td th:text="${author.id}"></td>
-                <td th:text="${author.name}"></td>
-                <td th:text="${author.email}"></td>
-                <td><a th:href="@{'author?id=' + ${author.id}}">상세보기</a></td>
+            <tr th:each="post : ${postList}">
+                <td th:text="${post.id}"></td>
+                <td th:text="${post.title}"></td>
+                <td><a th:href="@{'post?id=' + ${post.id}}">상세보기</a></td>
             </tr>
             </tbody>
         </table>

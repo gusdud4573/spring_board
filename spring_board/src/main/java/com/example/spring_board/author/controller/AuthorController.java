@@ -1,6 +1,7 @@
 package com.example.spring_board.author.controller;
 
 import com.example.spring_board.author.domain.Author;
+import com.example.spring_board.author.etc.AuthorReqeustDto;
 import com.example.spring_board.author.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,22 +23,44 @@ public class AuthorController {
     @Autowired
     private AuthorService authorService;
 
+    @GetMapping("author/login")
+    public String authorLogin(){
+        return "author/login";
+    }
+
     @GetMapping("authors/new")
     public String authorCreateForm(){
         return "author/author-register";
     }
 
     @PostMapping("authors/new")
-    public String authorCreate(@RequestParam(value="name")String myname,
-                               @RequestParam(value="email")String myemail,
-                               @RequestParam(value="password")String mypassword,
-                               @RequestParam(value="role")String myrole) throws SQLException {
-        Author author1 = new Author();
-        author1.setName(myname);
-        author1.setEmail(myemail);
-        author1.setPassword(mypassword);
-        author1.setRole(myrole);
-        author1.setCreateDate(LocalDateTime.now()); //현재 시각을 찍는 메서드
+    public String authorCreate(AuthorReqeustDto authorReqeustDto) throws SQLException {
+
+
+//        방법1.setter방식 : 최초시점 이외의 다른 클래스에서 객체값을 변경함으로서, 유지보수의 어려움발생
+//        author1.setName(authorReqeustDto.getName());
+//        author1.setEmail(authorReqeustDto.getEmail());
+//        author1.setPassword(authorReqeustDto.getPassword());
+//        author1.setRole(authorReqeustDto.getRole());
+//        author1.setCreateDate(LocalDateTime.now());
+
+////        방법2.생성자 방식(setter배제)
+////        문제점은 반드시 매개변수의 순서를 맞춰줘야 한다는 점이고, 매개변수가 많아지게 되면 개발의 어려움.
+//        Author author1 = new Author(
+//                authorReqeustDto.getName(),
+//                authorReqeustDto.getEmail(),
+//                authorReqeustDto.getPassword(),
+//                authorReqeustDto.getRole()
+//        );
+
+//        방법3. builder 패턴 : 매개변수의 순서와 상관없이 객체 생성가능
+        Author author1 = Author.builder()
+                .password(authorReqeustDto.getPassword())
+                .name(authorReqeustDto.getName())
+                .email(authorReqeustDto.getEmail())
+                .role(authorReqeustDto.getRole())
+                .build();
+
         authorService.create(author1);
         return "redirect:/";
     }
@@ -57,18 +80,8 @@ public class AuthorController {
     }
 
     @PostMapping("author/update")
-    public String authorUpdate(@RequestParam(value="id")String myid,
-                               @RequestParam(value="name")String myname,
-                               @RequestParam(value="email")String myemail,
-                               @RequestParam(value="role")String myrole,
-                               @RequestParam(value="password")String mypassword) throws Exception {
-        Author author1 = new Author();
-        author1.setId(Long.parseLong(myid));
-        author1.setName(myname);
-        author1.setEmail(myemail);
-        author1.setRole(myrole);
-        author1.setPassword(mypassword);
-        authorService.update(author1);
+    public String authorUpdate(AuthorReqeustDto authorReqeustDto) throws Exception {
+        authorService.update(authorReqeustDto);
         return "redirect:/";
     }
 

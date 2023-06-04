@@ -22,7 +22,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	//security 라이브러리를 추가하게 되면, 프로젝트 전체에 스프링 보안모듈이 적용되게 됨
 	// -> 회원가입, 로그인 기능이 개발되고 해당 옵션을 풀어줘야함
-//	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
@@ -31,6 +31,10 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+//  AOP 라이브러리 추가
+//	implementation 'org.springframework.boot:spring-boot-starter-aop'
+//  JSON라이브러리 추가
+	implementation group: 'org.json', name: 'json', version: '20220924'
 }
 
 tasks.named('test') {
