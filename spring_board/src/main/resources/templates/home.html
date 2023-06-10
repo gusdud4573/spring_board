@@ -1,14 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .right-align {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-top: 10px;
+            margin-right: 15px;
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            color: #000000;
+        }
+    </style>
     <title>게시판 홈</title>
 </head>
 
 <body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="/">게시판 서비스</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -23,12 +39,17 @@
             <li class="nav-item">
                 <a class="nav-link" href="/posts">글목록</a>
             </li>
+            <li class="nav-item">
+                <td th:if="${session.my_greeting}!=null"><a class="nav-link" href="/doLogout">로그아웃</a></td>
+                <td th:if="${session.my_greeting}==null"><a class="nav-link" href="/author/login">로그인</a></td>
+            </li>
         </ul>
     </div>
 </nav>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<div class="right-align">
+    <span th:text="${session.my_greeting}"></span>
+</div>
+
 </body>
 </html>

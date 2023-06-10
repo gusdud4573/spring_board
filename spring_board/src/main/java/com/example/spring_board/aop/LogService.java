@@ -39,7 +39,7 @@ public class LogService {
         //일반적으로 실무에서는 콘솔이 아니라, log를 파일로 영구저장되도록 관리한다.
         //그런데, 정상적인 request까지 모두 로그로 남기게 되면 파일시스템에 용량이 full 차는 경우가 빈번.
         //그래서, log.info 뿐만 아니라, log.trace, log.debug, log.info, log.error 등의 로그 레벨이 존재한다.
-        log.error("error test");
+//        log.error("error test");
         return proceedingJoinPoint.proceed();
     }
 }

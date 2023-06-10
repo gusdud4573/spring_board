@@ -2,6 +2,12 @@
 server:
   port: 8081
 spring:
+  #session 스토리지를 redis로 사용하기 위한 설정
+  session:
+    storage-type: redis
+  redis:
+    host: localhost
+    port: 6379
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url : jdbc:mysql://localhost:3306/spring_board

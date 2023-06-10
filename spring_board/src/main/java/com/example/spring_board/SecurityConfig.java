@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.HttpSecurityBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -15,6 +17,11 @@ public class SecurityConfig {
 //스프링에서 빈을 만드는 방법 2가지(싱글톤)
 //방법1. Component 방식
     //개발자가 직접 컨트롤이 가능한 내부 클래스에서 사용
+
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
 
 //방법2. Configuration + Bean 방식
     //개발자가 컨트롤이 불가능한 외부 라이브러리 적용시 사용

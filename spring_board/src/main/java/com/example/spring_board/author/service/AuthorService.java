@@ -8,6 +8,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -21,6 +23,9 @@ public class AuthorService implements UserDetailsService {
     //authorList, findById, create, 수정, 삭제
     @Autowired
     private AuthorRepository authorRepository;
+    //의존성 주입(dependency injection - DI)
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     //회원목록조회
     public List<Author> findAll(){
@@ -35,6 +40,7 @@ public class AuthorService implements UserDetailsService {
 
     //회원가입(등록)
     public void create(Author author) throws SQLException {
+        author.setPassword(passwordEncoder.encode(author.getPassword()));
         authorRepository.save(author);
     }
 
